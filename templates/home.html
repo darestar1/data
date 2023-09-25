@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Home Page</h1>
+    <p>All Observations Links:</p>
+    <ul>
+        <li><a href="{% url 'observation_update' %}">Update Observation List</a></li>
+        <li><a href="{% url 'observation_create' %}">Create Observation</a></li>
+        <li><a href="{% url 'delete_observation' %}">Delete Observation</a></li>
+        <li><a href="{% url 'observation_list_readonly' %}">View Observation List </a></li>
+    </ul>
+    
+    <p>All Rocks Links:</p>
+    <ul>
+        <li><a href="{% url 'rock_list' %}">List of Rocks</a></li>
+        <li><a href="{% url 'rock_create' %}">Create Rock</a></li>
+        
+        
+        
+
+        <li><a href="{% url 'rock_delete' %}">Delete Rock</a></li>
+    </ul>
+</body>
+</html>
