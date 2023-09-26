@@ -1,83 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Update Obsevation</title>
+    <title>Update Observation List</title>
 </head>
 <body>
-    <h1>Update Observation</h1>
-    <form method="post" action="{% url 'observation_list' observation.id %}">
-        {% csrf_token %}
-        
-        
-        <table border="1">
-            <thead>
+    <h1>Update Observation List</h1>
+    
+    <!-- Arama Formu -->
+    <form method="get">
+        <label for="search">Search:</label>
+        <input type="text" name="search" id="search">
+        <button type="submit">Search</button>
+    </form>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Client Name</th>
+                <th>City</th>
+                <th>Village</th>
+                <th>ER No</th>
+                <th>Licence No</th>
+                <th>Phase</th>
+                <th>Observation ID</th>
+                <th>Sack No</th>
+                <th>Sample No</th>
+                <th>Date</th>
+                <th>Sample Type</th>
+                <th>Analysis Type 1</th>
+                <th>Analysis Type 2</th>
+                <th>Projection</th>
+                <th>UTM Zone</th>
+                <th>Easting M</th>
+                <th>Northing M</th>
+                <th>Elevation M</th>
+                <th>Geologist 1</th>
+                <th>Geologist 2</th>
+                <th>Rock Type</th>
+                <th>Rock Type Code</th>
+                <th>Description</th>
+                <th>Update</th>  <!-- Added a table header for the Update column -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for observation in observations  %}  <!-- Updated the loop variable to 'observation' -->
                 <tr>
-                    <th>Client Name</th>
-                    <th>City</th>
-                    <th>Village</th>
-                    <th>ER No</th>
-                    <th>Licence No</th>
-                    <th>Phase</th>
-                    <th>Observation ID</th>
-                    <th>Sack No</th>
-                    <th>Sample No</th>
-                    <th>Date</th>
-                    <th>Sample Type</th>
-                    <th>Analysis Type 1</th>
-                    <th>Analysis Type 2</th>
-                    <th>Projection</th>
-                    <th>UTM Zone</th>
-                    <th>Easting M</th>
-                    <th>Northing M</th>
-                    <th>Elevation M</th>
-                    <th>Geologist 1</th>
-                    <th>Geologist 2</th>
-                    <th>Rock Type</th>
-                    <th>Rock Type Code</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for observation in observations %}
-                    <tr>
-                        <td><input type="text" name="ClientName" value="{{ observation.ClientName }}"></td>
-                        <td><input type="text" name="City" value="{{ observation.City }}"></td>
-                        <td><input type="text" name="Village" value="{{ observation.Village }}"></td>
-                        <td><input type="text" name="ER_No" value="{{ observation.ER_No }}"></td>
-                        <td><input type="text" name="Licence_No" value="{{ observation.Licence_No }}"></td>
-                        <td><input type="text" name="Phase" value="{{ observation.Phase }}"></td>
-                        <td><input type="text" name="ObservationID" value="{{ observation.ObservationID }}"></td>
-                        <td><input type="text" name="SackNo" value="{{ observation.SackNo }}"></td>
-                        <td><input type="text" name="SampleNo" value="{{ observation.SampleNo }}"></td>
-                        <td><input type="text" name="Date" value="{{ observation.Date }}"></td>
-                        <td><input type="text" name="SampleType" value="{{ observation.SampleType }}"></td>
-                        <td><input type="text" name="AnalysisType1" value="{{ observation.AnalysisType1 }}"></td>
-                        <td><input type="text" name="AnalysisType2" value="{{ observation.AnalysisType2 }}"></td>
-                        <td><input type="text" name="Projection" value="{{ observation.Projection }}"></td>
-                        <td><input type="text" name="UTMZone" value="{{ observation.UTMZone }}"></td>
-                        <td><input type="text" name="EastingM" value="{{ observation.EastingM }}"></td>
-                        <td><input type="text" name="NorthingM" value="{{ observation.NorthingM }}"></td>
-                        <td><input type="text" name="ElevationM" value="{{ observation.ElevationM }}"></td>
-                        <td><input type="text" name="Geologist1" value="{{ observation.Geologist1 }}"></td>
-                        <td><input type="text" name="Geologist2" value="{{ observation.Geologist2 }}"></td>
-                        <td><input type="text" name="RockType" value="{{ observation.RockType }}"></td>
-                        <td><input type="text" name="RockTypeCode" value="{{ observation.RockTypeCode }}"></td>
-                        <td><input type="text" name="Description" value="{{ observation.Description }}"></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        
-        <button type="submit">Update Observation</button>
-        <a href="{% url 'observation_list' %}">Cancel</a>
-    </form>
-        {% if observation.id %}
-    <a href="{% url 'observation_list' observation.id %}">Cancel</a>
-        {% else %}
-            
-            <!-- You can add additional content or messages here -->
-        {% endif %}
+                    <td>{{ observation.ClientName }}</td>
+                    <td>{{ observation.City }}</td>
+                    <td>{{ observation.Village }}</td>
+                    <td>{{ observation.ER_No }}</td>
+                    <td>{{ observation.Licence_No }}</td>
+                    <td>{{ observation.Phase }}</td>
+                    <td>{{ observation.ObservationID }}</td>
+                    <td>{{ observation.SackNo }}</td>
+                    <td>{{ observation.SampleNo }}</td>
+                    <td>{{ observation.Date }}</td>
+                    <td>{{ observation.SampleType }}</td>
+                    <td>{{ observation.AnalysisType1 }}</td>
+                    <td>{{ observation.AnalysisType2 }}</td>
+                    <td>{{ observation.Projection }}</td>
+                    <td>{{ observation.UTMZone }}</td>
+                    <td>{{ observation.EastingM }}</td>
+                    <td>{{ observation.NorthingM }}</td>
+                    <td>{{ observation.ElevationM }}</td>
+                    <td>{{ observation.Geologist1 }}</td>
+                    <td>{{ observation.Geologist2 }}</td>
+                    <td>{{ observation.RockType }}</td>
+                    <td>{{ observation.RockTypeCode }}</td>
+                    <td>{{ observation.Description }}</td>
+                    <td><a href="{% url 'observation_update' observation.id %}">Update</a></td>
 
-    </form>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

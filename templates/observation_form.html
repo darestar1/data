@@ -1,88 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Observation Form</title>
+    <title>{% if form.instance.pk %}Update Observation{% else %}Create Observation{% endif %}</title>
 </head>
 <body>
-    <h1>Observation Form</h1>
+    <h1>{% if form.instance.pk %}Update Observation{% else %}Create Observation{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
-        <form method="post">
-            {% csrf_token %}
-            <label for="phase">Phase:</label>
-            <input type="text" id="phase" name="phase" required><br>
-        
-            <label for="client_name">Client Name:</label>
-            <input type="text" id="client_name" name="client_name" required><br>
-        
-            <label for="city">City:</label>
-            <input type="text" id="city" name="city" required><br>
-        
-            <label for="village">Village:</label>
-            <input type="text" id="village" name="village" required><br>
-        
-            <label for="er_no">ER No:</label>
-            <input type="text" id="er_no" name="er_no" required><br>
-        
-            <label for="licence_no">Licence No:</label>
-            <input type="text" id="licence_no" name="licence_no" required><br>
-        
-            <label for="observation_id">Observation ID:</label>
-            <input type="text" id="observation_id" name="observation_id" required><br>
-        
-            <label for="sack_no">Sack No:</label>
-            <input type="text" id="sack_no" name="sack_no" required><br>
-        
-            <label for="sample_no">Sample No:</label>
-            <input type="text" id="sample_no" name="sample_no" required><br>
-        
-            <label for="date">Date:</label>
-            <input type="text" id="date" name="date" required><br>
-        
-            <label for="sample_type">Sample Type:</label>
-            <input type="text" id="sample_type" name="sample_type" required><br>
-        
-            <label for="analysis_type1">Analysis Type 1:</label>
-            <input type="text" id="analysis_type1" name="analysis_type1" required><br>
-        
-            <label for="analysis_type2">Analysis Type 2:</label>
-            <input type="text" id="analysis_type2" name="analysis_type2" required><br>
-        
-            <label for="projection">Projection:</label>
-            <input type="text" id="projection" name="projection" required><br>
-        
-            <label for="utm_zone">UTM Zone:</label>
-            <input type="text" id="utm_zone" name="utm_zone" required><br>
-        
-            <label for="easting_m">EastingM:</label>
-            <input type="text" id="easting_m" name="easting_m" required><br>
-        
-            <label for="northing_m">NorthingM:</label>
-            <input type="text" id="northing_m" name="northing_m" required><br>
-        
-            <label for="elevation_m">ElevationM:</label>
-            <input type="text" id="elevation_m" name="elevation_m" required><br>
-        
-            <label for="geologist1">Geologist1:</label>
-            <input type="text" id="geologist1" name="geologist1" required><br>
-        
-            <label for="geologist2">Geologist2:</label>
-            <input type="text" id="geologist2" name="geologist2" required><br>
-        
-            <label for="rock_type">Rock Type:</label>
-            <input type="text" id="rock_type" name="rock_type" required><br>
-        
-            <label for="rock_type_code">Rock Type Code:</label>
-            <input type="text" id="rock_type_code" name="rock_type_code" required><br>
-        
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
-        
-            <input type="submit" value="Submit">
-        </form>
-        
-        
-        
+        {{ form.as_p }}
+        <button type="submit">{% if form.instance.pk %}Update{% else %}Create{% endif %}</button>
     </form>
+    <a href="{% url 'observation_list' %}">Back to Observation List</a>
 </body>
 </html>

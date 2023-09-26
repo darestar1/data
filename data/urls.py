@@ -21,22 +21,25 @@ from demo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home, name='home'),
-    path('observations/', views.observation_list, name='observation_list'),
+   
     path('observations/create/', views.observation_create, name='observation_create'),
+    path('observations/', views.observation_list, name='observation_list'),
     
-    path('rocks/update/<int:rock_id>/', views.rock_update, name='rock_update'),
+
+    
+    path('observations/update/<int:observation_id>/', views.observation_update, name='observation_update'),
 
 
-    
-    
+    path('observations/update/', views.observation_list, name='observation_list'),
     path('observations/list/readonly/', views.observation_list_readonly, name='observation_list_readonly'),
 
     path('observations/delete/', views.delete_observation, name='delete_observation'),
     path('rocks/', views.rock_list, name='rock_list'),
     path('rocks/create/', views.rock_create, name='rock_create'),
-    path('observation/update/<int:observation_id>/', views.observation_update, name='observation_update'),
+    path('rocks/update/<int:rock_id>/', views.rock_update, name='rock_update'),
     path('rocks/delete/', views.delete_rock, name='rock_delete'),
     path('rocks/update/', views.rock_list, name='rock_list'),
-    path('observations/', views.observation_list, name='observation_list'),
-    path('observations/update/', views.observation_update_selected, name='observation_update_selected'),
+    
+    
+    path('rocks/list/readonly/', views.rock_list_read, name='rock_list_read'),
 ]

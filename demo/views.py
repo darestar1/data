@@ -4,9 +4,6 @@ from .forms import ObservationForm, RockForm, StreamForm, SoilForm, OreMicroscop
 from django.urls import reverse
 
 # Tüm gözlemleri listeleme
-def observation_list(request):
-    observations = Observation.objects.all()
-    return render(request, 'observation_list.html', {'observations': observations})
 
 # Yeni bir gözlem oluşturma
 
@@ -26,39 +23,38 @@ def observation_create(request):
     
     return render(request, 'observation_create.html', {'form': form})
 
+from django.shortcuts import render
+from .models import Observation  # Import the Observation model
+
 def observation_list(request):
-    observations = Observation.objects.all()
+    observations = Observation.objects.all()  
     return render(request, 'observation_list.html', {'observations': observations})
+
+
+
+
+
+
+def observation_update(request, observation_id):
+    observation = get_object_or_404(Observation, id=observation_id)
+
+    if request.method == 'POST':
+        form = ObservationForm(request.POST, instance=observation)
+        if form.is_valid():
+            form.save()
+            return redirect('observation_list')  # Redirect to the observation list after updating
+    else:
+        form = ObservationForm(instance=observation)
+
+    return render(request, 'observation_update.html', {'form': form, 'observation': observation})
+
+
+    
 
 def observation_list_readonly(request):
     observations = Observation.objects.all()
     return render(request, 'observation_list_readonly.html', {'observations': observations})
 
-# Belirli bir gözlemi güncelleme
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Observation
-from .forms import ObservationUpdateForm
-
-def observation_update_selected(request):
-    if request.method == 'POST':
-        selected_observation_ids = request.POST.getlist('selected_observation')
-        observations = Observation.objects.filter(id__in=selected_observation_ids)
-        form = ObservationUpdateForm(request.POST, instance=observations[0])  # Varsayılan olarak bir form oluşturun
-
-        if form.is_valid():
-            # Seçilen gözlemleri güncelleme işlemi
-            for observation in observations:
-                form = ObservationUpdateForm(request.POST, instance=observation)
-                form.save()
-                
-            return redirect('observation_list')  # Gözlem listesine geri dön
-        else:
-            # Form geçerli değilse, hataları ele alabilirsiniz
-            pass
-    else:
-        return redirect('observation_list')  # POST verisi yoksa, gözlem listesine geri dön
-
-    return render(request, 'observation_list.html', {'observations': Observation.objects.all()})
 
 
 # Belirli bir gözlemi silme
@@ -78,24 +74,13 @@ def delete_observation(request):
 
 
 
-from .forms import ObservationUpdateForm
-
-def observation_update(request, observation_id):
-    observation = get_object_or_404(Observation, pk=observation_id)
-
-    if request.method == 'POST':
-        form = ObservationUpdateForm(request.POST, instance=observation)
-        if form.is_valid():
-            form.save()
-            return redirect('observation_list')  # Gözlem listesine yönlendirme
-    else:
-        form = ObservationUpdateForm(instance=observation)
-
-    return render(request, 'observation_update.html', {'form': form, 'observation': observation})
 
 
 
 # Rock modeli için işlevler
+def rock_list_read(request):
+    rocks = Rock.objects.all()
+    return render(request, 'rock_list_read.html', {'rocks': rocks})
 def rock_list(request):
     rocks = Rock.objects.all()
     return render(request, 'rock_list.html', {'rocks': rocks})
@@ -115,9 +100,7 @@ def rock_create(request):
 # Existing views for list and create are kept as is
 
 
-def rock_list(request):
-    rocks = Rock.objects.all()
-    return render(request, 'rock_list.html', {'rocks': rocks})
+
 
 def rock_update(request, rock_id):
     rock = get_object_or_404(Rock, id=rock_id)
